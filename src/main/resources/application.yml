@@ -1,0 +1,19 @@
+server:
+  port: 2137
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/imageboard
+    username: sonni
+    password: 123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+
+  main:
+    web-application-type: servlet

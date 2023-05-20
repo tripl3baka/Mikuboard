@@ -1,0 +1,16 @@
+services:
+  db:
+    container_name: imageboard
+    image: postgres
+    environment:
+      POSTGRES_USER: sonni
+      POSTGRES_PASSWORD: 123
+      PGDATA: /data/postgres
+    volumes:
+      - db:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+volumes:
+  db:

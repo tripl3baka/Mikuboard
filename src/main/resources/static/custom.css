@@ -1,0 +1,87 @@
+body {
+    background-color: #f0f0f0;
+    color: #000000;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+
+.navbar {
+    background-color: #7289da;
+    border-bottom: none;
+}
+
+.navbar-brand {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+}
+
+.card-title {
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.card-text {
+    color: #000000;
+    font-size: 12px;
+}
+
+footer {
+    background-color: #7289da;
+    color: #ffffff;
+    font-size: 12px;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Custom CSS for thread hierarchy */
+.card:not(:first-child) {
+    margin-top: 15px;
+}
+
+[data-level="1"] {
+    margin-left: 0;
+}
+
+[data-level="2"] {
+    margin-left: 10px;
+}
+
+[data-level="3"] {
+    margin-left: 20px;
+}
+
+[data-level="4"] {
+    margin-left: 30px;
+}
+
+[data-level="5"] {
+    margin-left: 40px;
+}
+
+.answer {
+    background-color: #f0f0f0;
+    border: 1px solid #e0e0e0;
+    margin-top: 5px;
+    padding: 5px;
+    font-size: 12px;
+}
+
+.thread-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    float: left;
+    margin-right: 10px;
+}
