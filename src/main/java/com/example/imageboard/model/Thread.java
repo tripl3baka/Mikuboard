@@ -2,6 +2,7 @@ package com.example.imageboard.model;
 
 import jakarta.persistence.*;
 
+
 @Entity
 public class Thread {
 
