@@ -85,3 +85,18 @@ footer {
     float: left;
     margin-right: 10px;
 }
+
+.thread-info {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end;
+    text-align: center;
+}
+
+

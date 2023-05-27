@@ -8,7 +8,6 @@ public class Thread {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Integer id;
     private String title;
     private String description;
@@ -20,7 +19,6 @@ public class Thread {
     }
 
     public Thread() {
-
     }
 
     public Integer getId() {
