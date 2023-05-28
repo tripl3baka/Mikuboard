@@ -1,29 +1,37 @@
 package com.example.imageboard.controller;
+import com.example.imageboard.model.Reply;
 import com.example.imageboard.model.Thread;
+import com.example.imageboard.repository.ReplyRepository;
 import com.example.imageboard.repository.ThreadRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 @Controller
 public class ThreadPostController {
 
     private final ThreadRepository threadRepository;
-    public ThreadPostController(ThreadRepository threadRepository) {
+    private final ReplyRepository replyRepository;
+    public ThreadPostController(ThreadRepository threadRepository, ReplyRepository replyRepository) {
         this.threadRepository = threadRepository;
+        this.replyRepository = replyRepository;
     }
 
-    record ThreadData(String title, String description, String imgURL){
+    record ReplyData(String description, String name, String title, String imgURL){
     }
 
-    @RequestMapping(value = "/posted", method = RequestMethod.POST)
-    private String addThread(ThreadData threadData){
+    @PostMapping(value = "/posted")
+    private String addThread(ReplyData replyData){
         Thread thread = new Thread();
-        thread.setTitle(threadData.title);
-        thread.setDescription(threadData.description);
-        thread = threadRepository.saveAndFlush(thread);
-        Integer id = thread.getId();
-        return "redirect:thread/" + id;
+        thread.setTitle(replyData.title);
+        Reply reply = new Reply();
+        reply.setDescription(replyData.description);
+        reply.setName(replyData.name);
+        reply.setThread(thread);
+        threadRepository.saveAndFlush(thread);
+        replyRepository.saveAndFlush(reply);
+
+        return "redirect:thread/" + thread.getId();
     }
 
 }

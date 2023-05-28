@@ -1,9 +1,6 @@
 package com.example.imageboard.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Reply {
@@ -11,16 +8,22 @@ public class Reply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(length = 65534, columnDefinition = "TEXT")
     private String description;
     private String name;
-    private Integer threadID;
+    @ManyToOne
+    private Thread thread;
 
-    public Reply(Integer id, String description, String name, Integer threadID) {
-        this.id = id;
-        this.description = description;
-        this.name = name;
-        this.threadID = threadID;
+    private String imgURL;
+
+    public Thread getThread() {
+        return thread;
     }
+
+    public void setThread(Thread thread) {
+        this.thread = thread;
+    }
+
 
     public Reply() {
     }
@@ -45,11 +48,16 @@ public class Reply {
         this.name = name;
     }
 
-    public Integer getThreadID() {
-        return threadID;
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setThreadID(Integer threadID) {
-        this.threadID = threadID;
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 }

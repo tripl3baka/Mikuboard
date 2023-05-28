@@ -1,6 +1,7 @@
 package com.example.imageboard.model;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -10,25 +11,20 @@ public class Thread {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;
-    private String description;
-    private String name;
+
+    public List<Reply> getReplies() {
+        return replies;
+    }
+
+    public void setReplies(List<Reply> replies) {
+        this.replies = replies;
+    }
+
+    @OneToMany(mappedBy = "thread")
+    private List<Reply> replies;
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Thread(Integer id, String title, String description) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
     }
 
     public Thread() {
@@ -46,11 +42,4 @@ public class Thread {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

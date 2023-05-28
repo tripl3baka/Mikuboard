@@ -16,11 +16,12 @@ public class RestAPIController {
     record ThreadData(String title, String description, String imgURL){
     }
 
+
+    //TODO
     @PostMapping("/post")
     private void addThread(@RequestBody ThreadData threadData){
         Thread thread = new Thread();
         thread.setTitle(threadData.title);
-        thread.setDescription(threadData.description);
         threadRepository.save(thread);
     }
 

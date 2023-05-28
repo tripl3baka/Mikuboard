@@ -13,25 +13,26 @@
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <h2 class="text-center">Submit Thread</h2>
-            <form method="post" th:action="posted" th:object="${thread}">
-<!--                <div class="mb-3">-->
-<!--                    <label for="name" class="form-label">Your Name</label>-->
-<!--                    <input th:field = "*{name}" type="text" class="form-control" id="name" placeholder="Enter your name">-->
-<!--                </div>-->
+            <form method="post" th:action="posted">
+                <!--                <div class="mb-3">-->
+                <!--                    <label for="name" class="form-label">Your Name</label>-->
+                <!--                    <input th:field = "*{name}" type="text" class="form-control" id="name" placeholder="Enter your name">-->
+                <!--                </div>-->
                 <div class="mb-3">
                     <label for="title" class="form-label">Thread Title</label>
-                    <input th:field = "*{title}" type="text" class="form-control" id="title" placeholder="Enter thread title">
+                    <input name="title" type="text" class="form-control" id="title"
+                           placeholder="Enter thread title">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Thread Description</label>
-                    <textarea th:field = "*{description}" class="form-control" id="description" rows="3" placeholder="Enter thread description"></textarea>
+                    <textarea name="description" class="form-control" id="description" rows="3"
+                              placeholder="Enter thread description"></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Upload Image</label>
                     <input type="file" class="form-control" id="image">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
-
             </form>
         </div>
     </div>

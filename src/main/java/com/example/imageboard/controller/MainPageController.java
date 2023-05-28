@@ -1,4 +1,5 @@
 package com.example.imageboard.controller;
+import com.example.imageboard.repository.ReplyRepository;
 import com.example.imageboard.repository.ThreadRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,11 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Controller
 public class MainPageController {
     private final ThreadRepository threadRepository;
-    public MainPageController(ThreadRepository threadRepository) {
+    private final ReplyRepository replyRepository;
+
+    public MainPageController(ThreadRepository threadRepository, ReplyRepository replyRepository) {
         this.threadRepository = threadRepository;
+        this.replyRepository = replyRepository;
     }
 
     @GetMapping("/m")
@@ -25,8 +29,7 @@ public class MainPageController {
     }
 
     @GetMapping("/newthread")
-    public String newThread(Model model){
-        model.addAttribute("thread", new Thread());
+    public String newThread(){
         return "newThread";
     }
 
@@ -39,21 +42,8 @@ public class MainPageController {
         }
         model.addAttribute("thread", thread.get());
 
-
         return "threadPage";
     }
 
-    @GetMapping("/thread/reply/{id}")
-    public String threadReplyPage(@PathVariable("id") int id, Model model){
-
-        Optional<Thread> thread = threadRepository.findById(id);
-        if(thread.isEmpty()) {
-            throw new ResponseStatusException(NOT_FOUND,"Thread not found");
-        }
-        model.addAttribute("thread", thread.get());
-
-
-        return "threadReplyPage";
-    }
 
 }
