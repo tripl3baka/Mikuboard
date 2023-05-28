@@ -11,6 +11,19 @@ public class Thread {
     private Integer id;
     private String title;
     private String description;
+    private String name;
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Thread(Integer id, String title, String description) {
         this.id = id;
@@ -23,10 +36,6 @@ public class Thread {
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getTitle() {

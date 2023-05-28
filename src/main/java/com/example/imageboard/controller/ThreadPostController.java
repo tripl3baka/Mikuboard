@@ -21,7 +21,9 @@ public class ThreadPostController {
         Thread thread = new Thread();
         thread.setTitle(threadData.title);
         thread.setDescription(threadData.description);
-        threadRepository.save(thread);
-        return "redirect:hello";
+        thread = threadRepository.saveAndFlush(thread);
+        Integer id = thread.getId();
+        return "redirect:thread/" + id;
     }
+
 }

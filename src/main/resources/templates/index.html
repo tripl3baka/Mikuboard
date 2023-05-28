@@ -11,7 +11,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-        <a class="navbar-brand" href="#">Imageboard</a>
+        <a class="navbar-brand" href="/m">Imageboard</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -37,7 +37,7 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-12 text-center">
-                <a th:href="newthread" class="btn btn-primary">Start new thread</a>
+        <a th:href="newthread" class="btn btn-primary">Start new thread</a>
         </div>
     </div>
 </div>
@@ -46,7 +46,7 @@
 
 <div class="container mt-4">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8-center">
             <div class="card mb-4" data-level="1" th:each="thread : ${threads}" >
                 <div class="card-body">
                    <a th:href="@{'thread/' + ${thread.id}}"><h5 class="card-title" th:text="${thread.title}">Thread Title 1</h5></a>
@@ -56,12 +56,28 @@
                     <img class="thread-image" src="sample_image_1.jpg" alt="Sample Image">
                     <p class="card-text" th:text="${thread.description}">This is the content of the first thread. Lorem ipsum dolor sit amet,
                         consectetur adipiscing elit.</p>
-                    <form th:method = "GET" th:action = "threadPageRedirect">
-                        <a th:href="newthread" class="btn btn-primary">Reply</a>
-                    </form>
-                    <div class="answer" data-level="1">Answer 1</div>
-                    <div class="answer" data-level="2">Answer 2</div>
-                    <div class="answer" data-level="3">Answer 3</div>
+                    <a th:href="@{'thread/reply/' + ${thread.id}}" class="btn btn-primary">Reply</a>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Author Name 1</h5>
+                            <img class="answer-image" src="sample_image_1.jpg" alt="Answer Image">
+                            <p class="card-text">Answer Description 1</p>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Author Name 2</h5>
+                            <img class="answer-image" src="sample_image_2.jpg" alt="Answer Image">
+                            <p class="card-text">Answer Description 2</p>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Author Name 3</h5>
+                            <img class="answer-image" src="sample_image_3.jpg" alt="Answer Image">
+                            <p class="card-text">Answer Description 3</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
