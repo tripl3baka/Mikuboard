@@ -28,7 +28,7 @@ public class ReplyPostController {
     record ReplyData(String description, String name, String imgURL){
     }
 
-    @PostMapping("/submit/{id}")
+    @PostMapping("/m/submit/{id}")
     private String addReply(@PathVariable("id") int id, ReplyData replyData, Model model){
         Optional<Thread> thread = threadRepository.findById(id);
         if(thread.isEmpty()) {
@@ -48,7 +48,7 @@ public class ReplyPostController {
         reply.setThread(thread.get());
         replyRepository.saveAndFlush(reply);
 
-        return"redirect:/thread/" + id;
+        return"redirect:/m/thread/" + id;
     }
 }
 

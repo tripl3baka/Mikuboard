@@ -1,13 +1,15 @@
 body {
     background-color: #3d3955;
-    background-image: url("dell.jpg");
+    opacity: 650;
+    background-image: url("miku.png");
     color: #000000;
     font-family: Arial, sans-serif;
     font-size: 12px;
 }
 
+
 .navbar {
-    background-color: #70a1ff;
+    background-color: rgba(49, 156, 133, 0.71);
     border-bottom: none;
 }
 
@@ -25,7 +27,7 @@ body {
 }
 
 .card {
-    background-color: #70a1ff;
+    background-color: rgba(49, 156, 133, 0.71);
     border: 1px solid #e0e0e0;
 }
 
@@ -42,35 +44,15 @@ body {
 
 footer {
     background-color: #7289da;
+    min-height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
     color: #ffffff;
     font-size: 12px;
     text-align: center;
     padding: 10px 0;
-}
-
-/* Custom CSS for thread hierarchy */
-.card:not(:first-child) {
-    margin-top: 15px;
-}
-
-[data-level="1"] {
-    margin-left: 0;
-}
-
-[data-level="2"] {
-    margin-left: 10px;
-}
-
-[data-level="3"] {
-    margin-left: 20px;
-}
-
-[data-level="4"] {
-    margin-left: 30px;
-}
-
-[data-level="5"] {
-    margin-left: 40px;
 }
 
 .answer {
@@ -94,18 +76,48 @@ footer {
     top: 0;
     right: 0;
     padding: 5px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(244, 121, 101, 0.72);
     color: #fff;
     font-weight: bold;
-    display: flex;
     justify-content: flex-end;
     text-align: center;
+    display: block;
+
 }
 
 .btn-primary{
     color: #000000;
-    background-color: #567ac2;
+    background-color: rgba(244, 121, 101, 0.72);
 
+}
+
+.pagination > li > a
+{
+    background-color: rgba(244, 121, 101, 0.72);
+    color: #000000;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #5a5a5a;
+    background-color: rgba(244, 121, 101, 0.72);
+    border-color: rgba(244, 121, 101, 0.72);
+}
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: #000000;
+    border: solid 1px #000000;
+}
+
+.pagination > .active > a:hover
+{
+    background-color: #000000;
+    border: solid 1px #5A4181;
 }
 
 

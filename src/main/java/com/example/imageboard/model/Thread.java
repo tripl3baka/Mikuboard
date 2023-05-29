@@ -1,6 +1,8 @@
 package com.example.imageboard.model;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -40,6 +42,17 @@ public class Thread {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<Reply> getRepliesWithImage() {
+        List<Reply> listOfImages = new ArrayList<>();
+
+        for (Reply reply : replies) {
+            if (reply.getImgURL() != null && !reply.getImgURL().equals("")) {
+                listOfImages.add(reply);
+            }
+        }
+        return listOfImages;
     }
 
 }

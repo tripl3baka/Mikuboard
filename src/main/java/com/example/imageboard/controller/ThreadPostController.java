@@ -20,7 +20,7 @@ public class ThreadPostController {
     record ReplyData(String description, String name, String title, String imgURL){
     }
 
-    @PostMapping(value = "/posted")
+    @PostMapping(value = "/m/posted")
     private String addThread(ReplyData replyData){
         Thread thread = new Thread();
         thread.setTitle(replyData.title);
@@ -36,7 +36,7 @@ public class ThreadPostController {
         threadRepository.saveAndFlush(thread);
         replyRepository.saveAndFlush(reply);
 
-        return "redirect:thread/" + thread.getId();
+        return "redirect:/m/thread/" + thread.getId();
     }
 
 }

@@ -1,6 +1,8 @@
 package com.example.imageboard.controller;
 import com.example.imageboard.repository.ReplyRepository;
 import com.example.imageboard.repository.ThreadRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,17 +25,25 @@ public class MainPageController {
     }
 
     @GetMapping("/m")
-    public String mainPage (Model model){
-        model.addAttribute("threads", threadRepository.findAll(Sort.by(Sort.Direction.DESC, "id")));
+    public String redirect(){
+        return "redirect:/m/0";
+    }
+
+    @GetMapping("/m/{id}")
+    public String mainPage (@PathVariable("id") int id, Model model){
+
+        Pageable page = PageRequest.of(id,10, Sort.by("id").descending());
+
+        model.addAttribute("threads", threadRepository.findAll(page));
         return "index";
     }
 
-    @GetMapping("/newthread")
+    @GetMapping("/m/newthread")
     public String newThread(){
         return "newThread";
     }
 
-    @GetMapping("/thread/{id}")
+    @GetMapping("/m/thread/{id}")
     public String threadPage(@PathVariable("id") int id, Model model){
 
         Optional<Thread> thread = threadRepository.findById(id);
