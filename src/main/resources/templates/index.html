@@ -63,7 +63,7 @@
                     <p class="card-text" th:text="${thread.replies[0].description}">Thread Description</p>
 
                     <div class="card mb-4" th:each="reply,stats: ${thread.replies}"
-                         th:if="${reply != thread.replies[0] && stats.index < 4}">
+                         th:if="${reply != thread.replies[0] && stats.index &lt; 4}">
                         <div class="card-body">
                             <div class="thread-info">
                                 <span class="thread-id" th:text="'No.'+ ${reply.id}">ID</span>
@@ -75,25 +75,17 @@
                         </div>
                     </div>
                     <a th:href="@{'thread/' + ${thread.id}}" class="btn btn-primary">Reply</a>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<nav class="mt-4" aria-label="Page navigation">
+<nav class="mt-4">
     <ul class="pagination justify-content-center">
-        <li class="page-item"><a class="page-link" href="/m/0">1</a></li>
-        <li class="page-item"><a class="page-link" href="/m/1">2</a></li>
-        <li class="page-item"><a class="page-link" href="/m/2">3</a></li>
-        <li class="page-item"><a class="page-link" href="/m/3">4</a></li>
-        <li class="page-item"><a class="page-link" href="/m/4">5</a></li>
-        <li class="page-item"><a class="page-link" href="/m/5">6</a></li>
-        <li class="page-item"><a class="page-link" href="/m/6">7</a></li>
-        <li class="page-item"><a class="page-link" href="/m/7">8</a></li>
-        <li class="page-item"><a class="page-link" href="/m/8">9</a></li>
-        <li class="page-item"><a class="page-link" href="/m/9">10</a></li>
+        <li class="page-item"
+            th:each="i,stat: ${#numbers.sequence(0,threadCount/10)}"
+        ><a class="page-link" th:href="'/m/' + ${stat.index+1}" th:text="${stat.index + 1}">1</a></li>
     </ul>
 </nav>
 

@@ -25,16 +25,16 @@ public class MainPageController {
     }
 
     @GetMapping("/m")
-    public String redirect(){
-        return "redirect:/m/0";
+    public String redirect(Model model){
+        return mainPage(1, model);
     }
 
     @GetMapping("/m/{id}")
     public String mainPage (@PathVariable("id") int id, Model model){
 
-        Pageable page = PageRequest.of(id,10, Sort.by("id").descending());
-
+        Pageable page = PageRequest.of(id-1,10, Sort.by("id").descending());
         model.addAttribute("threads", threadRepository.findAll(page));
+        model.addAttribute("threadCount", threadRepository.count());
         return "index";
     }
 

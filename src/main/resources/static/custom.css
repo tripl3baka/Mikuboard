@@ -2,6 +2,8 @@ body {
     background-color: #3d3955;
     opacity: 650;
     background-image: url("miku.png");
+    background-size: cover;
+    background-attachment: fixed;
     color: #000000;
     font-family: Arial, sans-serif;
     font-size: 12px;
