@@ -11,25 +11,26 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-        <a class="navbar-brand" href="/m">Imageboard</a>
+        <a class="navbar-brand" href="/m">
+            <img src="/title.png" alt="..." height="75"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Gallery</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Upload</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#">xd</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#">xdd</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#">xddd</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#">xdddd</a>-->
+<!--                </li>-->
             </ul>
         </div>
     </div>
@@ -37,31 +38,37 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-12 text-center">
-        <a th:href="newthread" class="btn btn-primary">Start new thread</a>
+            <a th:href="newthread" class="btn btn-primary">Start new thread</a>
         </div>
     </div>
 </div>
 
 
-
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-8-center">
-            <div class="card mb-4" data-level="1" th:each="thread : ${threads}" >
+            <div class="card mb-4" data-level="1" th:each="thread : ${threads}">
                 <div class="card-body">
-                   <a th:href="@{'thread/' + ${thread.id}}">
-                       <h5 class="card-title" th:text="${thread.title}">Thread Title 1</h5></a>
+                    <a th:href="@{'thread/' + ${thread.id}}">
+                        <h4 class="card-title" th:text="${thread.title}">Thread Title 1</h4></a>
                     <div class="thread-info">
-                        <span class="thread-id" th:text="${thread.id}">ID</span>
+                        <span class="thread-id" th:text="${thread.replies[0].getId()}">ID</span>
                     </div>
+                    <h6 th:text="${thread.replies[0].name}">Author Name 1</h6>
 
-                    <img class="thread-image" src="sample_image_1.jpg" alt="Sample Image">
+                    <img class="thread-image" src="sample_image_1.jpg" alt="Sample Image"
+                         th:if="${thread.replies[0].getImgURL() != null && thread.replies[0].getImgURL() != ''}">
                     <p class="card-text" th:text="${thread.replies[0].description}">Thread Description</p>
 
-                    <div class="card mb-4" th:each="reply,stats: ${thread.replies}" th:if="${reply != thread.replies[0] && stats.index < 4}">
+                    <div class="card mb-4" th:each="reply,stats: ${thread.replies}"
+                         th:if="${reply != thread.replies[0] && stats.index < 4}">
                         <div class="card-body">
-                            <h5 class="card-title" th:text="${reply.name}">Author Name</h5>
-                            <img class="answer-image" th:src="${reply.imgURL}" alt="Answer Image" src="#">
+                            <div class="thread-info">
+                                <span class="thread-id" th:text="${reply.id}">ID</span>
+                            </div>
+                            <h6  th:text="${reply.name}">Author Name</h6>
+                            <img class="answer-image" th:src="${reply.imgURL}" alt="Answer Image" src="#"
+                                 th:if="${reply.getImgURL() != null && reply.getImgURL() != ''}">
                             <p class="card-text" th:text="${reply.description}">Answer Description 1</p>
                         </div>
                     </div>

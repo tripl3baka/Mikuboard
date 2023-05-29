@@ -10,6 +10,7 @@ public class Reply {
     private Integer id;
     @Column(length = 65534, columnDefinition = "TEXT")
     private String description;
+
     private String name;
     @ManyToOne
     private Thread thread;

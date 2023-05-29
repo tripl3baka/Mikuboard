@@ -26,7 +26,12 @@ public class ThreadPostController {
         thread.setTitle(replyData.title);
         Reply reply = new Reply();
         reply.setDescription(replyData.description);
-        reply.setName(replyData.name);
+        if(replyData.name == null || replyData.name.equals("")) {
+            reply.setName("Anonymous");
+        }
+        else{
+            reply.setName(replyData.name);
+        }
         reply.setThread(thread);
         threadRepository.saveAndFlush(thread);
         replyRepository.saveAndFlush(reply);

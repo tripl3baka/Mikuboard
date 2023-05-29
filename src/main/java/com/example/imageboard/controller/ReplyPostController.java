@@ -37,7 +37,12 @@ public class ReplyPostController {
         Reply reply = new Reply();
 
         model.addAttribute("thread", thread.get());
-        reply.setName(replyData.name);
+        if(replyData.name == null || replyData.name.equals("")) {
+            reply.setName("Anonymous");
+        }
+        else{
+            reply.setName(replyData.name);
+        }
         reply.setDescription(replyData.description);
         reply.setImgURL(replyData.imgURL);
         reply.setThread(thread.get());
