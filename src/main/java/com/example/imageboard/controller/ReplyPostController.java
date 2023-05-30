@@ -25,7 +25,7 @@ public class ReplyPostController {
         this.threadRepository = threadRepository;
     }
 
-    record ReplyData(String description, String name, String imgURL){
+    record ReplyData(String description, String name){
     }
 
     @PostMapping("/m/submit/{id}")
@@ -44,7 +44,6 @@ public class ReplyPostController {
             reply.setName(replyData.name);
         }
         reply.setDescription(replyData.description);
-        reply.setImgURL(replyData.imgURL);
         reply.setThread(thread.get());
         replyRepository.saveAndFlush(reply);
 

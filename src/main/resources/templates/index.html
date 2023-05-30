@@ -39,7 +39,7 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-12 text-center">
-            <a th:href="newthread" class="btn btn-primary">Start new thread</a>
+            <a th:href="@{'/m/newthread'}" class="btn btn-primary">Start new thread</a>
         </div>
     </div>
 </div>
@@ -49,16 +49,16 @@
         <div class="col-md-8-center">
             <div class="card mb-4" data-level="1" th:each="thread : ${threads}">
                 <div class="card-body">
-                    <a th:href="@{'thread/' + ${thread.id}}">
+                    <a th:href="@{'/m/thread/' + ${thread.id}}">
                         <h4 class="card-title" th:text="${thread.title}">Thread Title 1</h4></a>
                     <div class="thread-info">
                         <span class="thread-id" th:text="'No.'+ ${thread.replies[0].getId()}">ID</span>
                         <span class="ri" th:text="'R:'+ ${thread.replies.size()-1} + '/I:' +
                         ${thread.getRepliesWithImage().size()}"></span>
                     </div>
-                    <h6 th:text="${thread.replies[0].name}">Author Name 1</h6>
 
-                    <img class="thread-image" src="sample_image_1.jpg" alt="Sample Image"
+                    <h6 th:text="${thread.replies[0].name}">Author Name 1</h6>
+                    <img class="thread-image" th:src="${thread.replies[0].getImgURL()}" alt="Sample Image"
                          th:if="${thread.replies[0].getImgURL() != null && thread.replies[0].getImgURL() != ''}">
                     <p class="card-text" th:text="${thread.replies[0].description}">Thread Description</p>
 
@@ -74,7 +74,7 @@
                             <p class="card-text" th:text="${reply.description}">Answer Description 1</p>
                         </div>
                     </div>
-                    <a th:href="@{'thread/' + ${thread.id}}" class="btn btn-primary">Reply</a>
+                    <a th:href="@{'/m/thread/' + ${thread.id}}" class="btn btn-primary">Reply</a>
                 </div>
             </div>
         </div>
