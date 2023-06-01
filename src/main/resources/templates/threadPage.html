@@ -71,6 +71,7 @@
                     <h5 class="card-title" th:text="${thread.title}">Thread Title</h5>
                     <div class="thread-info">
                         <span class="thread-id" th:text="${thread.replies[0].id}">ID</span>
+                        <span th:text="'Date: ' + ${#temporals.format(thread.replies[0].date, 'dd/MMM/yyyy HH:mm:ss')}"></span>
                     </div>
                     <img class="thread-image" src="sample_image.jpg" alt="Sample Image" th:if="${thread.replies[0].getImgURL() != null && thread.replies[0].getImgURL() != ''}">
                     <p class="card-text" th:text="${thread.replies[0].getDescription()}">Thread Description</p>
@@ -82,6 +83,7 @@
                 <div class="card-body">
                     <div class="thread-info">
                         <span class="thread-id" th:text="${reply.id}">ID</span>
+                        <span th:text="'Date: ' + ${#temporals.format(reply.date, 'dd/MMM/yyyy HH:mm:ss')}"></span>
                     </div>
                     <h5 class="card-title" th:text="${reply.name}">Author Name 1</h5>
                     <img class="answer-image" src="#" th:src="${reply.imgURL}" alt="Answer Image" th:if="${reply.getImgURL() != null && reply.getImgURL() != ''}">

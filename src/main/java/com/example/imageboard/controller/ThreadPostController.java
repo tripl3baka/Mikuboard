@@ -9,6 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
+import static java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME;
+
 
 @Controller
 public class ThreadPostController {
@@ -28,8 +33,10 @@ public class ThreadPostController {
 
     @PostMapping(value = "/m/posted")
     private String addThread(ReplyData replyData) {
+        ZonedDateTime date = ZonedDateTime.now();
         Thread thread = new Thread();
         thread.setTitle(replyData.title);
+        thread.setBumpedAt(date);
         threadRepository.saveAndFlush(thread);
 
         Reply reply = new Reply();
@@ -45,7 +52,7 @@ public class ThreadPostController {
                         fileStorageService.storeFile(replyData.imgFile)
                 )
         );
-
+        reply.setDate(date);
         reply.setThread(thread);
         replyRepository.saveAndFlush(reply);
 

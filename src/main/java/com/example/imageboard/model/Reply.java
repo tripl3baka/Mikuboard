@@ -2,6 +2,8 @@ package com.example.imageboard.model;
 
 import jakarta.persistence.*;
 
+import java.time.ZonedDateTime;
+
 @Entity
 public class Reply {
 
@@ -16,6 +18,16 @@ public class Reply {
     private Thread thread;
 
     private String imgURL;
+
+    private ZonedDateTime date;
+
+    public ZonedDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(ZonedDateTime date) {
+        this.date = date;
+    }
 
     public Thread getThread() {
         return thread;

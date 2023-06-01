@@ -55,6 +55,7 @@
                         <span class="thread-id" th:text="'No.'+ ${thread.replies[0].getId()}">ID</span>
                         <span class="ri" th:text="'R:'+ ${thread.replies.size()-1} + '/I:' +
                         ${thread.getRepliesWithImage().size()}"></span>
+                        <span th:text="'Date: ' + ${#temporals.format(thread.replies[0].date, 'dd/MMM/yyyy HH:mm:ss')}"></span>
                     </div>
 
                     <h6 th:text="${thread.replies[0].name}">Author Name 1</h6>
@@ -67,6 +68,7 @@
                         <div class="card-body">
                             <div class="thread-info">
                                 <span class="thread-id" th:text="'No.'+ ${reply.id}">ID</span>
+                                <span th:text="'Date: ' + ${#temporals.format(reply.date, 'dd/MMM/yyyy HH:mm:ss')}"></span>
                             </div>
                             <h6  th:text="${reply.name}">Author Name</h6>
                             <img class="answer-image" th:src="${reply.imgURL}" alt="Answer Image" src="#"

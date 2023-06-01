@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.imageboard.model.Thread;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -45,6 +47,11 @@ public class ReplyPostController {
         }
         reply.setDescription(replyData.description);
         reply.setThread(thread.get());
+
+        ZonedDateTime date = ZonedDateTime.now();
+        reply.setDate(date);
+        reply.getThread().setBumpedAt(date);
+        threadRepository.saveAndFlush(reply.getThread());
         replyRepository.saveAndFlush(reply);
 
         return"redirect:/m/thread/" + id;

@@ -2,6 +2,7 @@ package com.example.imageboard.model;
 
 import jakarta.persistence.*;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,15 @@ public class Thread {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;
+    private ZonedDateTime bumpedAt;
+
+    public ZonedDateTime getBumpedAt() {
+        return bumpedAt;
+    }
+
+    public void setBumpedAt(ZonedDateTime bumpedAt) {
+        this.bumpedAt = bumpedAt;
+    }
 
     public List<Reply> getReplies() {
         return replies;
