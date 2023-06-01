@@ -63,13 +63,12 @@ public class MainPageController {
     }
 
 
-    @GetMapping("/files/{filename:.+}")
+    @GetMapping("/uploads/files/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
 
         Resource file = fileStorageService.openFile(filename);
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+        return ResponseEntity.ok().body(file);
     }
 
 }
