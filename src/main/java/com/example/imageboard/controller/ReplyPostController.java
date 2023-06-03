@@ -3,11 +3,13 @@ package com.example.imageboard.controller;
 import com.example.imageboard.model.Reply;
 import com.example.imageboard.repository.ReplyRepository;
 import com.example.imageboard.repository.ThreadRepository;
+import com.example.imageboard.service.FileStorageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.example.imageboard.model.Thread;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
@@ -22,12 +24,15 @@ public class ReplyPostController {
     private final ReplyRepository replyRepository;
     private final ThreadRepository threadRepository;
 
-    public ReplyPostController(ReplyRepository replyRepository, ThreadRepository threadRepository) {
+    private final FileStorageService fileStorageService;
+
+    public ReplyPostController(ReplyRepository replyRepository, ThreadRepository threadRepository, FileStorageService fileStorageService) {
         this.replyRepository = replyRepository;
         this.threadRepository = threadRepository;
+        this.fileStorageService = fileStorageService;
     }
 
-    record ReplyData(String description, String name){
+    record ReplyData(String description, String name, MultipartFile imgFile){
     }
 
     @PostMapping("/m/submit/{id}")
@@ -46,6 +51,13 @@ public class ReplyPostController {
             reply.setName(replyData.name);
         }
         reply.setDescription(replyData.description);
+        if(!replyData.imgFile.isEmpty()) {
+            reply.setImgURL(
+                    fileStorageService.getFileURL(
+                            fileStorageService.storeFile(replyData.imgFile)
+                    )
+            );
+        }
         reply.setThread(thread.get());
 
         ZonedDateTime date = ZonedDateTime.now();

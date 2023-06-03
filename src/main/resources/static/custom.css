@@ -73,6 +73,15 @@ footer {
     margin-right: 10px;
 }
 
+.reply-image{
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    float: left;
+    margin-right: 10px;
+}
+
+
 .thread-info {
     position: absolute;
     top: 0;
@@ -90,8 +99,17 @@ footer {
 .btn-primary{
     color: #000000;
     background-color: rgba(244, 121, 101, 0.72);
-
 }
+
+.btn-primary2{
+    width: 78px !important;
+    padding: 5px;
+    margin-left: 16px;
+    margin-bottom: 10px;
+    color: #000000;
+    background-color: rgba(244, 121, 101, 0.72);
+}
+
 
 .pagination > li > a
 {
@@ -121,5 +139,8 @@ footer {
     background-color: #000000;
     border: solid 1px #5A4181;
 }
+
+
+
 
 

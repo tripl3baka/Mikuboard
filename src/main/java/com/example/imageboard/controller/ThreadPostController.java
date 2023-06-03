@@ -47,11 +47,13 @@ public class ThreadPostController {
             reply.setName(replyData.name);
         }
 
-        reply.setImgURL(
-                fileStorageService.getFileURL(
-                        fileStorageService.storeFile(replyData.imgFile)
-                )
-        );
+        if(!replyData.imgFile.isEmpty()) {
+            reply.setImgURL(
+                    fileStorageService.getFileURL(
+                            fileStorageService.storeFile(replyData.imgFile)
+                    )
+            );
+        }
         reply.setDate(date);
         reply.setThread(thread);
         replyRepository.saveAndFlush(reply);

@@ -37,43 +37,46 @@
     </div>
 </nav>
 
-<div class="container mt-4">
-
-    <div class="card mb-4">
-        <div class="card-body">
-            <form method="post" th:action="${'/m/submit/' + thread.id}">
-                <div class="mb-3">
-                    <label for="nameInput" class="form-label">Name</label>
-                    <input name="name" type="text" class="form-control" id="nameInput" placeholder="Your Name">
-                </div>
-                <div class="mb-3">
-                    <label for="descriptionInput" class="form-label">Description</label>
-                    <textarea name="description" class="form-control" id="descriptionInput" rows="3"
-                              placeholder="Reply Description"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="imageInput" class="form-label">Upload Image</label>
-                    <input name="imgURL" type="file" class="form-control" id="imageInput">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+    <div class="container mt-4">
+        <div class="card mb-4"  id="replyBox">
+            <div class="card-body">
+                <form method="post" th:action="${'/m/submit/' + thread.id}" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="nameInput" class="form-label">Name</label>
+                        <input name="name" type="text" class="form-control" id="nameInput" placeholder="Your Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descriptionInput" class="form-label">Description</label>
+                        <textarea name="description" class="form-control" id="descriptionInput" rows="3"
+                                  placeholder="Reply Description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Upload Image</label>
+                        <input type="file" name="imgFile" class="form-control" id="image">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
         </div>
-    </div>
 
     <div class="row">
         <div class="col-md-6 offset-md-3">
 
             <div class="col-md-12 text-center">
-                <a th:href="@{'/' + ${thread.id}}" class="btn btn-primary">Reply</a>
+                <a class="btn btn-primary" id="replyButton">Reply</a>
             </div>
+
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${thread.title}">Thread Title</h5>
                     <div class="thread-info">
-                        <span class="thread-id" th:text="${thread.replies[0].id}">ID</span>
+                        <span class="thread-id" th:text="'No.'+ ${thread.replies[0].getId()}">ID</span>
+                        <span class="ri" th:text="'R:'+ ${thread.replies.size()-1} + '/I:' +
+                        ${thread.getRepliesWithImage().size()}"></span>
                         <span th:text="'Date: ' + ${#temporals.format(thread.replies[0].date, 'dd/MMM/yyyy HH:mm:ss')}"></span>
                     </div>
-                    <img class="thread-image" src="sample_image.jpg" alt="Sample Image" th:if="${thread.replies[0].getImgURL() != null && thread.replies[0].getImgURL() != ''}">
+                    <img class="thread-image" th:src="${thread.replies[0].getImgURL()}" alt="Sample Image"
+                         th:if="${thread.replies[0].getImgURL() != null && thread.replies[0].getImgURL() != ''}">
                     <p class="card-text" th:text="${thread.replies[0].getDescription()}">Thread Description</p>
                 </div>
             </div>
@@ -86,7 +89,8 @@
                         <span th:text="'Date: ' + ${#temporals.format(reply.date, 'dd/MMM/yyyy HH:mm:ss')}"></span>
                     </div>
                     <h5 class="card-title" th:text="${reply.name}">Author Name 1</h5>
-                    <img class="answer-image" src="#" th:src="${reply.imgURL}" alt="Answer Image" th:if="${reply.getImgURL() != null && reply.getImgURL() != ''}">
+                    <img class="reply-image" th:src="${reply.imgURL}" alt="Answer Image" src="#"
+                         th:if="${reply.getImgURL() != null && reply.getImgURL() != ''}">
                     <p class="card-text" th:text="${reply.description}">Answer Description 1</p>
                 </div>
             </div>
@@ -96,6 +100,20 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const targetDiv = document.getElementById("replyBox");
+    const btn = document.getElementById("replyButton");
+    targetDiv.style.display = "none";
+
+    btn.onclick = function () {
+        if (targetDiv.style.display !== "none") {
+            targetDiv.style.display = "none";
+        } else {
+            btn.style.display ="none";
+            targetDiv.style.display = "block";
+        }
+    };
+</script>
 </body>
 
 </html>
