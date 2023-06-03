@@ -86,14 +86,18 @@
 <nav class="mt-4">
     <ul class="pagination justify-content-center">
         <li class="page-item"
-            th:each="i,stat: ${#numbers.sequence(0,threadCount/10)}"
-        ><a class="page-link" th:href="'/m/' + ${stat.index+1}" th:text="${stat.index + 1}">1</a></li>
+            th:each="i,stat: ${#numbers.sequence(0,threadCount/10)}">
+            <a class="page-link" th:href="'/m/' + ${stat.index+1}" th:text="${stat.index + 1}">1</a>
+        </li>
     </ul>
+    <div class="col-md-12 text-center">
+        <a th:href="@{'/m/catalog'}" class="btn btn-primary">Catalog</a>
+    </div>
 </nav>
 
 
 <footer class="bg-dark text-white text-center py-3 mt-5">
-    Imageboard &copy; 2023
+    Mikuboard &copy; 2023
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>

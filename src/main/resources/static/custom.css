@@ -81,6 +81,13 @@ footer {
     margin-right: 10px;
 }
 
+.catalog-image{
+    width: 60%;
+    max-width: 130px;
+    max-height: 130px;
+    margin-right: 10px;
+}
+
 
 .thread-info {
     position: absolute;
@@ -140,7 +147,33 @@ footer {
     border: solid 1px #5A4181;
 }
 
+.thread-box {
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
 
+.thread-box img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}
 
+.col-md-2{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.catalog-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    margin-bottom: 15px;
+}
+
+.bare-text{
+    color: rgba(244, 121, 101, 0.72);
+}
 
 
