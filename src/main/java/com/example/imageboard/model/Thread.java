@@ -15,6 +15,15 @@ public class Thread {
     private Integer id;
     private String title;
     private ZonedDateTime bumpedAt;
+    private boolean isArchived;
+
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(boolean archived) {
+        isArchived = archived;
+    }
 
     public ZonedDateTime getBumpedAt() {
         return bumpedAt;

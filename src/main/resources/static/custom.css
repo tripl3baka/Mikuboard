@@ -81,14 +81,6 @@ footer {
     margin-right: 10px;
 }
 
-.catalog-image{
-    width: 60%;
-    max-width: 130px;
-    max-height: 130px;
-    margin-right: 10px;
-}
-
-
 .thread-info {
     position: absolute;
     top: 0;
@@ -165,11 +157,31 @@ footer {
 }
 
 .catalog-card{
-    display: flex;
     justify-content: center;
     align-items: center;
     height: 200px;
     margin-bottom: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.catalog-card-master{
+    margin-bottom: 30px;
+}
+
+.catalog-image{
+    width: 60%;
+    max-width: 130px;
+    max-height: 130px;
+    display: block;
+    margin: 0 auto;
+
+}
+
+.catalog-title{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
 }
 
 .bare-text{

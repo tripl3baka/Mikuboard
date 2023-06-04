@@ -55,6 +55,7 @@ public class MainPageController {
         }
         model.addAttribute("thread", thread.get());
 
+
         return "threadPage";
     }
 

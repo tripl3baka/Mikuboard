@@ -8,11 +8,14 @@ import com.example.imageboard.service.FileStorageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 import static java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 
 @Controller
@@ -37,7 +40,17 @@ public class ThreadPostController {
         Thread thread = new Thread();
         thread.setTitle(replyData.title);
         thread.setBumpedAt(date);
+        thread.setArchived(false);
         threadRepository.saveAndFlush(thread);
+
+        if(threadRepository.count() > 100) {
+            Optional<Thread> thread1 = threadRepository.findById(thread.getId()-100);
+            if(thread1.isEmpty()) {
+                throw new ResponseStatusException(NOT_FOUND,"Thread not found");
+            }
+            thread1.get().setArchived(true);
+            threadRepository.saveAndFlush(thread1.get());
+        }
 
         Reply reply = new Reply();
         reply.setDescription(replyData.description);
@@ -57,6 +70,7 @@ public class ThreadPostController {
         reply.setDate(date);
         reply.setThread(thread);
         replyRepository.saveAndFlush(reply);
+
 
         return "redirect:/m/thread/" + thread.getId();
     }

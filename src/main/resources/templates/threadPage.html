@@ -9,7 +9,7 @@
     <link href="/custom.css" rel="stylesheet">
 </head>
 
-<body>
+<body th:data-archived="${thread.isArchived ? 1:0 }">
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
         <a class="navbar-brand" href="/m">
@@ -37,30 +37,30 @@
     </div>
 </nav>
 
-    <div class="container mt-4">
-        <div class="card mb-4"  id="replyBox">
-            <div class="card-body">
-                <form method="post" th:action="${'/m/submit/' + thread.id}" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <label for="nameInput" class="form-label">Name</label>
-                        <input name="name" type="text" class="form-control" id="nameInput" placeholder="Your Name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="descriptionInput" class="form-label">Description</label>
-                        <textarea name="description" class="form-control" id="descriptionInput" rows="3"
-                                  placeholder="Reply Description"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Upload Image</label>
-                        <input type="file" name="imgFile" class="form-control" id="image">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
+<div class="container mt-4">
+    <div class="card mb-4" id="replyBox">
+        <div class="card-body">
+            <form method="post" th:action="${'/m/submit/' + thread.id}" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label">Name</label>
+                    <input name="name" type="text" class="form-control" id="nameInput" placeholder="Your Name">
+                </div>
+                <div class="mb-3">
+                    <label for="descriptionInput" class="form-label">Description</label>
+                    <textarea name="description" class="form-control" id="descriptionInput" rows="3"
+                              placeholder="Reply Description"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload Image</label>
+                    <input type="file" name="imgFile" class="form-control" id="image">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
+    </div>
 
     <div class="row">
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-12">
 
             <div class="col-md-12 text-center">
                 <a class="btn btn-primary reply-button-index" id="replyButton">Reply</a>
@@ -86,18 +86,20 @@
                 <div class="row">
 
                     <div class="card mb-4" th:each="reply : ${thread.replies}" th:if="${reply != thread.replies[0]}">
-                <div class="card-body">
-                    <div class="thread-info">
-                        <span class="thread-id" th:text="${reply.id}">ID</span>
-                        <span th:text="'Date: ' + ${#temporals.format(reply.date, 'dd/MMM/yyyy HH:mm:ss')}"></span>
+                        <div class="card-body">
+                            <div class="thread-info">
+                                <span class="thread-id" th:text="${reply.id}">ID</span>
+                                <span th:text="'Date: ' + ${#temporals.format(reply.date, 'dd/MMM/yyyy HH:mm:ss')}"></span>
+                            </div>
+                            <h5 class="card-title" th:text="${reply.name}">Author Name 1</h5>
+                            <img class="reply-image" th:src="${reply.imgURL}" alt="Answer Image" src="#"
+                                 th:if="${reply.getImgURL() != null && reply.getImgURL() != ''}">
+                            <p class="card-text" th:text="${reply.description}">Answer Description 1</p>
+                        </div>
                     </div>
-                    <h5 class="card-title" th:text="${reply.name}">Author Name 1</h5>
-                    <img class="reply-image" th:src="${reply.imgURL}" alt="Answer Image" src="#"
-                         th:if="${reply.getImgURL() != null && reply.getImgURL() != ''}">
-                    <p class="card-text" th:text="${reply.description}">Answer Description 1</p>
+
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -112,7 +114,7 @@
         if (targetDiv.style.display !== "none") {
             targetDiv.style.display = "none";
         } else {
-            btn.style.display ="none";
+            btn.style.display = "none";
             targetDiv.style.display = "block";
         }
     };

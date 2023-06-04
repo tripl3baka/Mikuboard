@@ -45,17 +45,17 @@
 
                 <div class="col-md-2" th:each="thread : ${threads}">
 
-                    <div class="card catalog-card text-center">
-                        <div class="card-body">
+                    <div class="card catalog-card-master text-center">
+                        <div class="card-body catalog-card">
                             <img class="catalog-image" th:src="${thread.replies[0].getImgURL()}" alt="Sample Image"
                                  th:if="${thread.replies[0].getImgURL() != null && thread.replies[0].getImgURL() != ''}">
-                            <a th:href="@{'/m/thread/' + ${thread.id}}">
-                            <h5 class="card-title" th:text="${thread.title}">Thread Title</h5>
-                            </a>
                             <span class="thread-id" th:text="'No.'+ ${thread.replies[0].getId()}">ID</span>
                             <span class="ri" th:text="'R:'+ ${thread.replies.size()-1} + '/I:' +
                         ${thread.getRepliesWithImage().size()}"></span>
                             <span th:text="'Date: ' + ${#temporals.format(thread.replies[0].date, 'dd/MMM/yyyy HH:mm:ss')}"></span>
+                            <a th:href="@{'/m/thread/' + ${thread.id}}">
+                                <h5 class="card-title catalog-title" th:text="${thread.title}">Thread Title</h5>
+                            </a>
                         </div>
                     </div>
 
