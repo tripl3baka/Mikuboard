@@ -70,10 +70,14 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="${thread.title}">Thread Title</h5>
                     <div class="thread-info">
+                        <span th:text="'Date: ' + ${#temporals.format(thread.replies[0].date, 'dd/MMM/yyyy HH:mm:ss')}"></span>
+                        <br/>
                         <span class="thread-id" th:text="'No.'+ ${thread.replies[0].getId()}">ID</span>
+                        <br/>
                         <span class="ri" th:text="'R:'+ ${thread.replies.size()-1} + '/I:' +
                         ${thread.getRepliesWithImage().size()}"></span>
-                        <span th:text="'Date: ' + ${#temporals.format(thread.replies[0].date, 'dd/MMM/yyyy HH:mm:ss')}"></span>
+                        <br/>
+                        <span class="page" th:text="'Page: ' + ${pageNumber}"></span>
                     </div>
                     <img class="thread-image" th:src="${thread.replies[0].getImgURL()}" alt="Sample Image"
                          th:if="${thread.replies[0].getImgURL() != null && thread.replies[0].getImgURL() != ''}">

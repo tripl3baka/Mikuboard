@@ -52,10 +52,12 @@
                     <a th:href="@{'/m/thread/' + ${thread.id}}">
                         <h4 class="card-title" th:text="${thread.title}">Thread Title 1</h4></a>
                     <div class="thread-info">
+                        <span th:text="'Date: ' + ${#temporals.format(thread.replies[0].date, 'dd/MMM/yyyy HH:mm:ss')}"></span>
+                        <br/>
                         <span class="thread-id" th:text="'No.'+ ${thread.replies[0].getId()}">ID</span>
+                        <br/>
                         <span class="ri" th:text="'R:'+ ${thread.replies.size()-1} + '/I:' +
                         ${thread.getRepliesWithImage().size()}"></span>
-                        <span th:text="'Date: ' + ${#temporals.format(thread.replies[0].date, 'dd/MMM/yyyy HH:mm:ss')}"></span>
                     </div>
 
                     <h6 th:text="${thread.replies[0].name}">Author Name 1</h6>

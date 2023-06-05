@@ -54,8 +54,9 @@ public class MainPageController {
         throw new ResponseStatusException(NOT_FOUND,"Thread not found");
         }
         model.addAttribute("thread", thread.get());
-
-
+        model.addAttribute("pageNumber",
+                ((threadRepository.CountThreadsWithIdHigherThan(
+                        thread.get().getId()))/10)+1);
         return "threadPage";
     }
 
