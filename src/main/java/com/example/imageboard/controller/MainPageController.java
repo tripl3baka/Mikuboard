@@ -75,4 +75,9 @@ public class MainPageController {
         return "catalog";
     }
 
+    @GetMapping("/m/login")
+    public String adminLogin(){
+        return "adminLogin";
+    }
+
 }
