@@ -3,7 +3,7 @@ package com.example.imageboard.model;
 import jakarta.persistence.*;
 
 @Entity
-public class Admin {
+public class LoginCredentials {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,10 +15,10 @@ public class Admin {
     @Column(length = 65534, columnDefinition = "TEXT")
     private String encodedPassword;
 
-    public Admin() {
+    public LoginCredentials() {
     }
 
-    public Admin(String name, String encodedPassword, Integer id) {
+    public LoginCredentials(String name, String encodedPassword, Integer id) {
         this.id = id;
         this.name = name;
         this.encodedPassword = encodedPassword;
