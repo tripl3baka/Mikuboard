@@ -35,7 +35,7 @@ public class AdminLoginController {
 
         if(compareHashedPasswordsResult(passwordEncoder.encode(adminLoginData.password),
                 e -> passwordEncoder.matches(adminLoginData.password, e))){
-            System.out.println("dupaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            //TODO
         }
         return "redirect:/m";
     }
