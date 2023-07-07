@@ -23,9 +23,16 @@ public class AdminLoginController {
         this.loginRepository = loginRepository;
     }
 
+    record LoginData(String name, String password){
+    }
+    @PostMapping(value="/m/login")
+    public String login(){
+        return"";
+    }
+
     @GetMapping("/m/login")
-    public String adminLogin(){
-        return "adminLogin";
+    public String login3(){
+        return"adminLogin";
     }
 
 }

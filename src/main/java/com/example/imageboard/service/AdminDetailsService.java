@@ -20,6 +20,7 @@ public class AdminDetailsService implements UserDetailsService {
         if (admin == null) {
             throw new UsernameNotFoundException(username);
         }
+        System.out.println(admin);
         return admin;
     }
 }
