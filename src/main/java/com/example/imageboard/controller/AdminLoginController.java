@@ -6,33 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.function.Predicate;
 
 @Controller
 public class AdminLoginController {
-    
-    LoginRepository loginRepository;
-    private String hashedAdminPassword;
 
+    @Autowired
+    private LoginRepository loginRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-    public AdminLoginController(LoginRepository loginRepository) {
-        this.loginRepository = loginRepository;
-    }
 
-    record LoginData(String name, String password){
-    }
-    @PostMapping(value="/m/login")
-    public String login(){
-        return"";
-    }
-
-    @GetMapping("/m/login")
-    public String login3(){
-        return"adminLogin";
+    @GetMapping("/m/user-login")
+    public String loginFormDisplay(){
+        //System.out.println(passwordEncoder.encode("123"));
+        LoginCredentials admin = loginRepository.findByName("admin");
+        System.out.println(admin.getName());
+        System.out.println(admin.getEncodedPassword());
+        return "login";
     }
 
 }

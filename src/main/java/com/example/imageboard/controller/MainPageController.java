@@ -1,7 +1,9 @@
 package com.example.imageboard.controller;
+import com.example.imageboard.repository.LoginRepository;
 import com.example.imageboard.repository.ReplyRepository;
 import com.example.imageboard.repository.ThreadRepository;
 import com.example.imageboard.service.FileStorageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

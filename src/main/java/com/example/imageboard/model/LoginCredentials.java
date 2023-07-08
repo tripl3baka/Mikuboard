@@ -17,7 +17,7 @@ public class LoginCredentials implements UserDetails {
     @Column(length = 65534, columnDefinition = "TEXT")
     private String name;
 
-    @Column(length = 65534, columnDefinition = "TEXT")
+    @Column(length = 255)
     private String encodedPassword;
 
     public LoginCredentials() {
