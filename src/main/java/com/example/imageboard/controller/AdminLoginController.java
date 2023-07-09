@@ -19,10 +19,10 @@ public class AdminLoginController {
     @GetMapping("/m/user-login")
     public String loginFormDisplay(){
         //System.out.println(passwordEncoder.encode("123"));
-        LoginCredentials admin = loginRepository.findByName("admin");
-        System.out.println(admin.getName());
-        System.out.println(admin.getEncodedPassword());
-        return "login";
+//        LoginCredentials admin = loginRepository.findByName("admin");
+//        System.out.println(admin.getName());
+//        System.out.println(admin.getEncodedPassword());
+        return "adminLogin";
     }
 
 }

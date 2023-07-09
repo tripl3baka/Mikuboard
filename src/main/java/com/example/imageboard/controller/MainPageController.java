@@ -35,7 +35,7 @@ public class MainPageController {
         return mainPage(1, model);
     }
 
-    @GetMapping("/m/{id}")
+    @GetMapping("/m/page/{id}")
     public String mainPage (@PathVariable("id") int id, Model model){
         Pageable page = PageRequest.of(id-1,10, Sort.by("bumpedAt").descending());
         model.addAttribute("threads", threadRepository.findAll(page));

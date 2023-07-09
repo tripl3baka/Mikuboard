@@ -91,7 +91,7 @@
     <ul class="pagination justify-content-center">
         <li class="page-item"
             th:each="i,stat: ${#numbers.sequence(0,threadCount/10)}">
-            <a class="page-link" th:href="'/m/' + ${stat.index+1}" th:text="${stat.index + 1}">1</a>
+            <a class="page-link" th:href="'/m/page/' + ${stat.index+1}" th:text="${stat.index + 1}">1</a>
         </li>
     </ul>
     <div class="col-md-12 text-center">

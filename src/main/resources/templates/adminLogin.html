@@ -16,9 +16,7 @@
             <h2 class="text-center">Administrator Login</h2>
             <form th:action="@{/m/login}" method="post">
                 <div class="mb-3">
-                    <div th:if="${param.error}">
-                        Invalid username and password.
-                    </div>
+                    <div th:if="${param.error}">xd</div>
                     <label for="username" class="form-label">Name</label>
                     <input name="username" class="form-control" id="username" placeholder="Enter your username">
                     <label for="password" class="form-label">Password</label>
