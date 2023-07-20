@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,16 +19,14 @@ public class AdminDetailsService implements UserDetailsService {
     @Autowired
     private LoginRepository loginRepository;
 
-    List<GrantedAuthority> authorityList;
-
     @Override
-    public UserDetails loadUserByUsername(String username) {
-        LoginCredentials admin = loginRepository.findByName("admin");
-        if (admin == null) {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        if (loginRepository.findByName("admin").isEmpty()) {
             throw new UsernameNotFoundException(username);
         }
-        authorityList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        System.out.println("xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+
+        LoginCredentials admin = loginRepository.findByName("admin").get();
         return admin;
     }
 }

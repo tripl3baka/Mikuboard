@@ -40,8 +40,7 @@
 <div class="container mt-4">
     <div class="row">
         <a th:href="@{'/m/user-login'}">[Login]</a>
-        <div class="card mb-4" sec:authentication="name"></div>
-
+        <div class="card mb-4">Logged as: <span sec:authentication="name"></span></div>
 
 
         <div class="col-md-12 text-center">

@@ -1,6 +1,6 @@
 package com.example.imageboard.configuration;
 
-import com.example.imageboard.component.CustomAuthenticationProvider;
+import com.example.imageboard.component.AuthProvider;
 import com.example.imageboard.service.AdminDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,11 +10,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
 
 @Configuration
 @EnableWebSecurity
@@ -22,19 +22,6 @@ public class WebSecurityConfig{
 
     @Autowired
     private AdminDetailsService adminDetailsService;
-
-
-    @Autowired
-    private CustomAuthenticationProvider authProvider;
-
-    @Bean
-    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder =
-                http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.authenticationProvider(authProvider);
-        return authenticationManagerBuilder.build();
-    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -51,12 +38,11 @@ public class WebSecurityConfig{
                 .formLogin((form) -> form
                         .loginPage("/m/user-login")
                         .defaultSuccessUrl("/m")
+                        .permitAll()
                         .loginProcessingUrl("/m/login")
                         .passwordParameter("password")
                         .usernameParameter("username")
                 )
-//                .sessionManagement((session) -> session
-//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .anonymous((AbstractHttpConfigurer::disable));
 
         return http.build();
