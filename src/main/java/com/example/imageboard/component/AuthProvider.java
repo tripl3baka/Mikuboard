@@ -7,6 +7,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -32,7 +33,7 @@ public class AuthProvider implements AuthenticationProvider {
         UserDetails admin = adminDetailsService.loadUserByUsername(username);
         if (passwordEncoder.matches(password, admin.getPassword())) {
             return new UsernamePasswordAuthenticationToken(
-                    username, password, new ArrayList<>());
+                    username, password, AuthorityUtils.createAuthorityList("ADMIN"));
         } else {
             throw new BadCredentialsException("Username/password mismatch");
         }

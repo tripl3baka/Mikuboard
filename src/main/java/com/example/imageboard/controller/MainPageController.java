@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.example.imageboard.model.Thread;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -35,14 +37,14 @@ public class MainPageController {
     @GetMapping("/m/page/{id}")
     public String mainPage (@PathVariable("id") int id, Model model){
         Pageable page = PageRequest.of(id-1,10, Sort.by("bumpedAt").descending());
-        model.addAttribute("threads", threadRepository.findAll(page));
-        model.addAttribute("threadCount", threadRepository.count());
+        model.addAttribute("threads", threadRepository.findThreadsNotArchived(page));
+        model.addAttribute("threadCount", threadRepository.CountNotArchivedThreads());
         return "index";
     }
 
     @GetMapping("/m/catalog")
     public String catalog(Model model){
-        model.addAttribute("threads", threadRepository.findAll());
+        model.addAttribute("threads", threadRepository.findThreadsNotArchived());
         return "catalog";
     }
 

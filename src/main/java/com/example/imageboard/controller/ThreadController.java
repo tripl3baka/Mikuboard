@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -63,13 +64,20 @@ public class ThreadController {
         thread.setArchived(false);
         threadRepository.saveAndFlush(thread);
 
-        if(threadRepository.count() > 100) {
-            Optional<Thread> thread1 = threadRepository.findById(thread.getId()-100);
-            if(thread1.isEmpty()) {
+        if(threadRepository.CountNotArchivedThreads() > 100) {
+            Optional<Thread> threadToArchive = threadRepository.findById(thread.getId()-100);
+            if(threadToArchive.isEmpty()) {
                 throw new ResponseStatusException(NOT_FOUND,"Thread not found");
             }
-            thread1.get().setArchived(true);
-            threadRepository.saveAndFlush(thread1.get());
+            threadToArchive.get().setArchived(true);
+//
+//            List<Reply> threadReplies = replyRepository.findRepliesBelongingToGivenThread(threadToArchive.get().getId());
+//            for (Reply threadReply : threadReplies) {
+//                threadReply.setArchived(true);
+//                replyRepository.saveAndFlush(threadReply);
+//            }
+
+            threadRepository.saveAndFlush(threadToArchive.get());
         }
 
         Reply reply = new Reply();

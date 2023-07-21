@@ -21,6 +21,15 @@ public class Reply {
 
     private ZonedDateTime date;
 
+    public Reply(Integer id, String description, String name, Thread thread, String imgURL, ZonedDateTime date) {
+        this.id = id;
+        this.description = description;
+        this.name = name;
+        this.thread = thread;
+        this.imgURL = imgURL;
+        this.date = date;
+    }
+
     public ZonedDateTime getDate() {
         return date;
     }
