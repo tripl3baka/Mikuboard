@@ -6,36 +6,56 @@ import com.example.imageboard.repository.ReplyRepository;
 import com.example.imageboard.repository.ThreadRepository;
 import com.example.imageboard.service.FileStorageService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
-import static java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 
 @Controller
-public class ThreadPostController {
+public class ThreadController {
 
     private final ThreadRepository threadRepository;
     private final ReplyRepository replyRepository;
     private final FileStorageService fileStorageService;
 
-    public ThreadPostController(ThreadRepository threadRepository, ReplyRepository replyRepository, FileStorageService fileStorageService) {
+    public ThreadController(ThreadRepository threadRepository, ReplyRepository replyRepository, FileStorageService fileStorageService) {
         this.threadRepository = threadRepository;
         this.replyRepository = replyRepository;
         this.fileStorageService = fileStorageService;
+    }
+
+    @GetMapping("/m/newthread")
+    public String createAction(){
+        return "newThread";
+    }
+
+    @GetMapping("/m/thread/{id}")
+    public String threadPage(@PathVariable("id") int id, Model model){
+
+        Optional<Thread> thread = threadRepository.findById(id);
+        if(thread.isEmpty()) {
+            throw new ResponseStatusException(NOT_FOUND,"Thread not found");
+        }
+        model.addAttribute("thread", thread.get());
+        model.addAttribute("pageNumber",
+                ((threadRepository.CountThreadsWithIdHigherThan(
+                        thread.get().getId()))/10)+1);
+        return "threadPage";
     }
 
     record ReplyData(String description, String name, String title, MultipartFile imgFile) {
     }
 
     @PostMapping(value = "/m/posted")
-    private String addThread(ReplyData replyData) {
+    private String storeAction(ReplyData replyData) {
         ZonedDateTime date = ZonedDateTime.now();
         Thread thread = new Thread();
         thread.setTitle(replyData.title);

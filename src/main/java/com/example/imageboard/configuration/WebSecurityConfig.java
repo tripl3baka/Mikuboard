@@ -33,7 +33,6 @@ public class WebSecurityConfig{
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/**")
                         .permitAll()
-
                 )
                 .formLogin((form) -> form
                         .loginPage("/m/user-login")
@@ -42,6 +41,11 @@ public class WebSecurityConfig{
                         .loginProcessingUrl("/m/login")
                         .passwordParameter("password")
                         .usernameParameter("username")
+                )
+                .logout((form) -> form
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .permitAll()
                 )
                 .anonymous((AbstractHttpConfigurer::disable));
 

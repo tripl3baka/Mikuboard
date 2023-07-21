@@ -22,14 +22,9 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Controller
 public class MainPageController {
     private final ThreadRepository threadRepository;
-    private final ReplyRepository replyRepository;
-    private final FileStorageService fileStorageService;
 
-
-    public MainPageController(ThreadRepository threadRepository, ReplyRepository replyRepository, FileStorageService fileStorageService) {
+    public MainPageController(ThreadRepository threadRepository) {
         this.threadRepository = threadRepository;
-        this.replyRepository = replyRepository;
-        this.fileStorageService = fileStorageService;
     }
 
     @GetMapping("/m")
@@ -43,34 +38,6 @@ public class MainPageController {
         model.addAttribute("threads", threadRepository.findAll(page));
         model.addAttribute("threadCount", threadRepository.count());
         return "index";
-    }
-
-    @GetMapping("/m/newthread")
-    public String newThread(){
-        return "newThread";
-    }
-
-    @GetMapping("/m/thread/{id}")
-    public String threadPage(@PathVariable("id") int id, Model model){
-
-        Optional<Thread> thread = threadRepository.findById(id);
-        if(thread.isEmpty()) {
-        throw new ResponseStatusException(NOT_FOUND,"Thread not found");
-        }
-        model.addAttribute("thread", thread.get());
-        model.addAttribute("pageNumber",
-                ((threadRepository.CountThreadsWithIdHigherThan(
-                        thread.get().getId()))/10)+1);
-        return "threadPage";
-    }
-
-
-    @GetMapping("/uploads/files/{filename:.+}")
-    @ResponseBody
-    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-
-        Resource file = fileStorageService.openFile(filename);
-        return ResponseEntity.ok().body(file);
     }
 
     @GetMapping("/m/catalog")

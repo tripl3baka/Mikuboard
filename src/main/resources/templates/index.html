@@ -42,6 +42,10 @@
         <a th:href="@{'/m/user-login'}">[Login]</a>
         <div class="card mb-4">Logged as: <span sec:authentication="name"></span></div>
 
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" class="btn btn-primary" value="Sign Out"/>
+        </form>
+
 
         <div class="col-md-12 text-center">
             <a th:href="@{'/m/newthread'}" class="btn btn-primary">Start new thread</a>

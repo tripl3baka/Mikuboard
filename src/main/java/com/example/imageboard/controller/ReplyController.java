@@ -12,21 +12,19 @@ import com.example.imageboard.model.Thread;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Controller
-public class ReplyPostController {
+public class ReplyController {
 
     private final ReplyRepository replyRepository;
     private final ThreadRepository threadRepository;
-
     private final FileStorageService fileStorageService;
 
-    public ReplyPostController(ReplyRepository replyRepository, ThreadRepository threadRepository, FileStorageService fileStorageService) {
+    public ReplyController(ReplyRepository replyRepository, ThreadRepository threadRepository, FileStorageService fileStorageService) {
         this.replyRepository = replyRepository;
         this.threadRepository = threadRepository;
         this.fileStorageService = fileStorageService;
