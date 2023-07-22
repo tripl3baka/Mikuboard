@@ -100,7 +100,7 @@
                 </div>
                 <a th:href="@{'/m/thread/' + ${thread.id}}" class="btn btn-primary reply-button-index">Reply</a>
 
-                <button th:data-threadID="${thread.id}" id="delete-button" class="btn btn-primary delete-button-index" sec:authorize="isAuthenticated()">Delete</button>
+                <button th:data-threadID="${thread.id}" id="thread-delete-button" class="btn btn-primary delete-button-index" sec:authorize="isAuthenticated()">Delete</button>
             </div>
         </div>
     </div>
@@ -124,7 +124,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/ThreadDeleteButtonFunction.js"></script>
+<script src="/Index.js"></script>
 </body>
 
 </html>

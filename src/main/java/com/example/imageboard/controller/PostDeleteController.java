@@ -1,5 +1,6 @@
 package com.example.imageboard.controller;
 
+import com.example.imageboard.repository.ReplyRepository;
 import com.example.imageboard.repository.ThreadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,9 +14,17 @@ public class PostDeleteController {
 
     @Autowired
     ThreadRepository threadRepository;
-    @PostMapping("/m/delete/{id}")
-    private ResponseEntity<String> deletePostAction(@PathVariable("id") int id){
+    @Autowired
+    ReplyRepository replyRepository;
+    @PostMapping("/m/delete/thread/{id}")
+    private ResponseEntity<String> deleteThreadAction(@PathVariable("id") int id){
         threadRepository.deleteById(id);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
+
+    @PostMapping("/m/delete/reply/{id}")
+    private ResponseEntity<String> deleteReplyAction(@PathVariable("id") int id){
+        replyRepository.deleteById(id);
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 }
