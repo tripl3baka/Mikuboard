@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
     <title>Selected Thread - Imageboard</title>
     <link href="/custom.css" rel="stylesheet">
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 
 <body th:data-archived="${thread.isArchived ? 1:0 }">
@@ -94,6 +96,9 @@
                             <div class="thread-info">
                                 <span class="thread-id" th:text="${reply.id}">ID</span>
                                 <span th:text="'Date: ' + ${#temporals.format(reply.date, 'dd/MMM/yyyy HH:mm:ss')}"></span>
+                                <button th:data-replyID="${reply.id}" id="delete-button"
+                                        class="btn btn-primary delete-button-index" sec:authorize="isAuthenticated()">Delete
+                                </button>
                             </div>
                             <h5 class="card-title" th:text="${reply.name}">Author Name 1</h5>
                             <img class="reply-image" th:src="${reply.imgURL}" alt="Answer Image" src="#"
@@ -123,7 +128,37 @@
         }
     };
 </script>
+<script>
+    const deletebuttons = document.querySelectorAll(".delete-button-index");
+    deletebuttons.forEach(function (button) {
+        const postID = button.attributes.getNamedItem("data-postID").value;
+        button.addEventListener("click", function () {
+            if (confirm("Do you want to delete post: " + postID)) {
+                const xhr = new XMLHttpRequest();
 
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            // alert("Response: " + xhr.responseText);
+                            location.reload();
+                        } else {
+                            alert("Response: " + xhr.status);
+                        }
+                    }
+                };
+
+                const elementToken = document.querySelector('meta[name="_csrf"]');
+                const token = elementToken?.getAttribute("content");
+                const elementHeader = document.querySelector('meta[name="_csrf_header"]');
+                const header = elementHeader?.getAttribute("content");
+
+                xhr.open('POST', '/m/delete/' + postID, true);
+                xhr.setRequestHeader(header, token);
+                xhr.send();
+            }
+        });
+    });
+</script>
 
 </body>
 

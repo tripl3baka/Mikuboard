@@ -30,7 +30,7 @@ public class WebSecurityConfig{
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/m/delete/**")
-                        .hasRole("ADMIN")
+                        .hasAuthority("ADMIN")
                         .requestMatchers("/**")
                         .permitAll()
                 )
