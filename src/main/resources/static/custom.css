@@ -187,5 +187,13 @@ footer {
 .bare-text{
     color: rgba(244, 121, 101, 0.72);
 }
+.delete-button-index{
+    width: 78px !important;
+    padding: 5px;
+    margin-left: 16px;
+    margin-bottom: 10px;
+    color: #000000;
+    background-color: rgba(255, 35, 0, 0.72);
+}
 
 

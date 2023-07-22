@@ -64,21 +64,11 @@ public class ThreadController {
         thread.setArchived(false);
         threadRepository.saveAndFlush(thread);
 
-        if(threadRepository.CountNotArchivedThreads() > 100) {
-            Optional<Thread> threadToArchive = threadRepository.findById(thread.getId()-100);
-            if(threadToArchive.isEmpty()) {
-                throw new ResponseStatusException(NOT_FOUND,"Thread not found");
+            Optional<Thread> threadToArchive = threadRepository.findById(thread.getId()-101);
+            if(threadToArchive.isPresent()) {
+                threadToArchive.get().setArchived(true);
+                threadRepository.saveAndFlush(threadToArchive.get());
             }
-            threadToArchive.get().setArchived(true);
-//
-//            List<Reply> threadReplies = replyRepository.findRepliesBelongingToGivenThread(threadToArchive.get().getId());
-//            for (Reply threadReply : threadReplies) {
-//                threadReply.setArchived(true);
-//                replyRepository.saveAndFlush(threadReply);
-//            }
-
-            threadRepository.saveAndFlush(threadToArchive.get());
-        }
 
         Reply reply = new Reply();
         reply.setDescription(replyData.description);

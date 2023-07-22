@@ -29,6 +29,8 @@ public class WebSecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("/m/delete/**")
+                        .hasRole("ADMIN")
                         .requestMatchers("/**")
                         .permitAll()
                 )
@@ -37,8 +39,8 @@ public class WebSecurityConfig{
                         .defaultSuccessUrl("/m")
                         .permitAll()
                         .loginProcessingUrl("/m/login")
-                        .passwordParameter("password")
-                        .usernameParameter("username")
+//                        .passwordParameter("password")
+//                        .usernameParameter("username")
                 )
                 .logout((form) -> form
                         .invalidateHttpSession(true)
