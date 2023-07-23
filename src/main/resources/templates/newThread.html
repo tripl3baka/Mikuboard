@@ -40,7 +40,7 @@
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <h2 class="text-center">Submit Thread</h2>
-            <form method="post" th:action="posted" enctype="multipart/form-data">
+            <form method="post" th:action="newthread" enctype="multipart/form-data" th:object="${replyData}">
                 <div class="mb-3">
                     <label for="name" class="form-label">Your Name</label>
                     <input name="name" type="text" class="form-control" id="name" placeholder="Enter your name">
@@ -49,11 +49,13 @@
                     <label for="title" class="form-label">Thread Title</label>
                     <input name="title" type="text" class="form-control" id="title"
                            placeholder="Enter thread title">
+                    <span class="error-text" th:if="${#fields.hasErrors('title')}" th:text="${#fields.errors('title').get(0)}"></span>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Thread Description</label>
                     <textarea name="description" class="form-control" id="description" rows="3"
                               placeholder="Enter thread description"></textarea>
+                    <span class="error-text" th:if="${#fields.hasErrors('description')}" th:text="${#fields.errors('description').get(0)}"></span>
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Upload Image</label>

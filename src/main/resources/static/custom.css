@@ -195,5 +195,24 @@ footer {
     color: #000000;
     background-color: rgba(255, 35, 0, 0.72);
 }
+.delete-button-threadpage{
+    width: 78px !important;
+    padding: 5px;
+    margin-left: 16px;
+    margin-bottom: 10px;
+    color: #000000;
+    background-color: rgba(255, 35, 0, 0.72);
+}
 
+label{
+    color: white;
+}
+
+.error-text{
+    color: red;
+}
+
+h2{
+    color:white
+}
 

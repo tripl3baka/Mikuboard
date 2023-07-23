@@ -1,6 +1,8 @@
 package com.example.imageboard.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.ZonedDateTime;
 
@@ -12,13 +14,10 @@ public class Reply {
     private Integer id;
     @Column(length = 65534, columnDefinition = "TEXT")
     private String description;
-
     private String name;
     @ManyToOne
     private Thread thread;
-
     private String imgURL;
-
     private ZonedDateTime date;
 
     public Reply(Integer id, String description, String name, Thread thread, String imgURL, ZonedDateTime date) {

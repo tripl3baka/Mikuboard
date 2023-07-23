@@ -5,16 +5,19 @@ import com.example.imageboard.model.Thread;
 import com.example.imageboard.repository.ReplyRepository;
 import com.example.imageboard.repository.ThreadRepository;
 import com.example.imageboard.service.FileStorageService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -34,29 +37,38 @@ public class ThreadController {
     }
 
     @GetMapping("/m/newthread")
-    public String createAction(){
+    public String createAction(ReplyData replyData) {
         return "newThread";
     }
 
     @GetMapping("/m/thread/{id}")
-    public String threadPage(@PathVariable("id") int id, Model model){
+    public String threadPage(@PathVariable("id") int id, Model model, ReplyData replyData) {
 
         Optional<Thread> thread = threadRepository.findById(id);
-        if(thread.isEmpty()) {
-            throw new ResponseStatusException(NOT_FOUND,"Thread not found");
+        if (thread.isEmpty()) {
+            throw new ResponseStatusException(NOT_FOUND, "Thread not found");
         }
         model.addAttribute("thread", thread.get());
         model.addAttribute("pageNumber",
                 ((threadRepository.CountThreadsWithIdHigherThan(
-                        thread.get().getId()))/10)+1);
+                        thread.get().getId())) / 10) + 1);
         return "threadPage";
     }
 
-    record ReplyData(String description, String name, String title, MultipartFile imgFile) {
+    record ReplyData(
+            @NotEmpty(message="Description cannot be empty!")
+            String description,
+            String name,
+            @NotEmpty(message="Title cannot be empty!")
+            String title,
+            MultipartFile imgFile) {
     }
 
-    @PostMapping(value = "/m/posted")
-    private String storeAction(ReplyData replyData) {
+    @PostMapping(value = "/m/newthread")
+    private String storeAction(@Valid ReplyData replyData, BindingResult result) {
+        if (result.hasErrors()) {
+            return "newThread";
+        }
         ZonedDateTime date = ZonedDateTime.now();
         Thread thread = new Thread();
         thread.setTitle(replyData.title);
@@ -64,11 +76,11 @@ public class ThreadController {
         thread.setArchived(false);
         threadRepository.saveAndFlush(thread);
 
-            Optional<Thread> threadToArchive = threadRepository.findById(thread.getId()-101);
-            if(threadToArchive.isPresent()) {
-                threadToArchive.get().setArchived(true);
-                threadRepository.saveAndFlush(threadToArchive.get());
-            }
+        Optional<Thread> threadToArchive = threadRepository.findById(thread.getId() - 101);
+        if (threadToArchive.isPresent()) {
+            threadToArchive.get().setArchived(true);
+            threadRepository.saveAndFlush(threadToArchive.get());
+        }
 
         Reply reply = new Reply();
         reply.setDescription(replyData.description);
@@ -78,7 +90,7 @@ public class ThreadController {
             reply.setName(replyData.name);
         }
 
-        if(!replyData.imgFile.isEmpty()) {
+        if (!replyData.imgFile.isEmpty()) {
             reply.setImgURL(
                     fileStorageService.getFileURL(
                             fileStorageService.storeFile(replyData.imgFile)

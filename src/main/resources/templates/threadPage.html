@@ -42,7 +42,7 @@
 <div class="container mt-4">
     <div class="card mb-4" id="replyBox">
         <div class="card-body">
-            <form method="post" th:action="${'/m/submit/' + thread.id}" enctype="multipart/form-data">
+            <form method="post" th:action="${'/m/submit/' + thread.id}" enctype="multipart/form-data" th:object="${replyData}">
                 <div class="mb-3">
                     <label for="nameInput" class="form-label">Name</label>
                     <input name="name" type="text" class="form-control" id="nameInput" placeholder="Your Name">
@@ -51,6 +51,7 @@
                     <label for="descriptionInput" class="form-label">Description</label>
                     <textarea name="description" class="form-control" id="descriptionInput" rows="3"
                               placeholder="Reply Description"></textarea>
+                    <span class="error-text" th:text="${desc_error}"></span>
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Upload Image</label>

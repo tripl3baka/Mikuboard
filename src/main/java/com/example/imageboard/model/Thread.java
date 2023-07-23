@@ -1,6 +1,8 @@
 package com.example.imageboard.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;

@@ -11,6 +11,14 @@ btn.onclick = function () {
     }
 };
 
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+console.log(urlParams.get('error'));
+
+if(urlParams.get('error') === "true"){
+        targetDiv.style.display = "block";
+}
+
 const deletebuttons = document.querySelectorAll(".delete-button-threadpage");
 deletebuttons.forEach(function (button) {
     const replyID = button.attributes.getNamedItem("data-replyID").value;
