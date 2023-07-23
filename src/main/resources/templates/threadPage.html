@@ -51,7 +51,7 @@
                     <label for="descriptionInput" class="form-label">Description</label>
                     <textarea name="description" class="form-control" id="descriptionInput" rows="3"
                               placeholder="Reply Description"></textarea>
-                    <span class="error-text" th:text="${desc_error}"></span>
+                    <span th:data-error="${desc_error}" class="error-text" th:text="${desc_error}"></span>
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Upload Image</label>
@@ -115,7 +115,9 @@
         </div>
     </div>
 </div>
-
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    Mikuboard &copy; 2023
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/ThreadPage.js"></script>
 

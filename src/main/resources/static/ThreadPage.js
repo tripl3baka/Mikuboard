@@ -11,11 +11,12 @@ btn.onclick = function () {
     }
 };
 
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-console.log(urlParams.get('error'));
+// const queryString = window.location.search;
+// const urlParams = new URLSearchParams(queryString);
+const errorLog = document.querySelector(".error-text").attributes.getNamedItem("data-error").value;
+console.log(errorLog);
 
-if(urlParams.get('error') === "true"){
+if(errorLog !== "" && errorLog !== null){
         targetDiv.style.display = "block";
 }
 
