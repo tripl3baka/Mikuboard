@@ -80,7 +80,10 @@
 
                     <h6 th:text="${thread.replies[0].name}">Author Name 1</h6>
                     <img class="thread-image" th:src="${thread.replies[0].getImgURL()}" alt="Sample Image"
-                         th:if="${thread.replies[0].getImgURL() != null && thread.replies[0].getImgURL() != ''}">
+                         th:if="${thread.replies[0].getImgURL() != null && thread.replies[0].getImgURL().endsWith('.jpg')}" src="">
+                    <video controls class="thread-video" th:src="${thread.replies[0].getImgURL()}"
+                         th:if="${thread.replies[0].getImgURL() != null && (thread.replies[0].getImgURL().endsWith('.webm')
+                         || thread.replies[0].getImgURL().endsWith('.mp4') || thread.replies[0].getImgURL().endsWith('.mov'))}" src=""></video>
                     <p class="card-text" th:text="${thread.replies[0].description}">Thread Description</p>
 
                     <div class="card mb-4" th:each="reply,stats: ${thread.replies}"
@@ -92,8 +95,11 @@
                                 <span class="thread-id" th:text="'No.'+ ${reply.id}">ID</span>
                             </div>
                             <h6 th:text="${reply.name}">Author Name</h6>
-                            <img class="reply-image" th:src="${reply.imgURL}" alt="Answer Image" src="#"
-                                 th:if="${reply.getImgURL() != null && reply.getImgURL() != ''}">
+                            <img class="reply-image" th:src="${reply.getImgURL()}" alt="Sample Image"
+                                 th:if="${reply.getImgURL() != null && reply.getImgURL().endsWith('.jpg')}" src="">
+                            <video controls class="reply-video" th:src="${reply.getImgURL()}"
+                                   th:if="${reply.getImgURL() != null && (reply.getImgURL().endsWith('.webm')
+                         || reply.getImgURL().endsWith('.mp4') || reply.getImgURL().endsWith('.mov'))}" src=""></video>
                             <p class="card-text" th:text="${reply.description}">Answer Description 1</p>
                         </div>
                     </div>
