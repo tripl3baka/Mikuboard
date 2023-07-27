@@ -1,5 +1,5 @@
 # Mikuboard - Miku-chan (literally)
-![img.png](img.png)
+![img.png](README_media/img.png)
 Mikuboard is an imageboard with functionality similar to various  _-chan_ boards. \
 It allows users to post either anonymously, or with username.
 The user can start new thread in given category, or post a reply to the existing thread \
@@ -10,7 +10,7 @@ mix of Boostrap, CSS and flex.
 Users can post threads and replies, if they don't state their username, the default name of 
 _Anonymous_ appears, just like on other imageboards. Website validates, whether the user filled thread's 
 title and description, same applies to reply.
-![threadandreply.gif](threadandreply.gif)
+![threadandreply.gif](README_media/threadandreply.gif)
 #### 1.1 Media upload
 Media upload is being handled by custom FileStorageService, that creates unique chan-like 
 filenames and stores files on the server. 
@@ -51,7 +51,7 @@ Threads can be "saved" from archiving by simply posting a reply. Thread with las
 is being automatically displayed on the top of both main page and catalog. 
 Even after deleting a reply by an administrator, the thread still stays refreshed to avoid uncontrolled
 archiving of other treads from last page. 
-![bump.gif](bump.gif)
+![bump.gif](README_media/bump.gif)
 ### 3.Posts deleting and administrator authentication
 Database includes encrypted credentials of every administrator on given board. \
 Authentication is being held by custom AuthProvider and AdminDetailsService. \
