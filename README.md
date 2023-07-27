@@ -10,7 +10,7 @@ mix of Boostrap, CSS and flex.
 Users can post threads and replies, if they don't state their username, the default name of 
 _Anonymous_ appears, just like on other imageboards. Website validates, whether the user filled thread's 
 title and description, same applies to reply.
-![threadandreply.gif](https://github.com/Mikuboard/threadandreply.gif)
+![threadandreply.gif](threadandreply.gif)
 #### 1.1 Media upload
 Media upload is being handled by custom FileStorageService, that creates unique chan-like 
 filenames and stores files on the server. 
@@ -51,7 +51,7 @@ Threads can be "saved" from archiving by simply posting a reply. Thread with las
 is being automatically displayed on the top of both main page and catalog. 
 Even after deleting a reply by an administrator, the thread still stays refreshed to avoid uncontrolled
 archiving of other treads from last page. 
-![bump.gif](https://github.com/Mikuboard/bump.gif)
+![bump.gif](bump.gif)
 ### 3.Posts deleting and administrator authentication
 Database includes encrypted credentials of every administrator on given board. \
 Authentication is being held by custom AuthProvider and AdminDetailsService. \
@@ -100,7 +100,7 @@ Web config restricts posts removal only for administrator role.
 After successfull authentication, the administrator can delete posts or the entire threads. \
 Cascade property of relation between Thread and Reply guarantees, that after deleting given thread, 
 all the replies are being deleted as well, without making additional requests to database.
-![admindelete.gif](https://github.com/Mikuboard/admindelete.gif)
+![admindelete.gif](admindelete.gif)
 Post delete functionality uses XMLHttpRequest to avoid page refreshing after thread delete 
 and the usage of another template just to delete post. 
 ```javascript
