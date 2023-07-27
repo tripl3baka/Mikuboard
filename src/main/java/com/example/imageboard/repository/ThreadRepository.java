@@ -21,7 +21,7 @@ public interface ThreadRepository extends JpaRepository<Thread, Integer>{
     @Query("SELECT COUNT(t.id) FROM Thread t WHERE t.isArchived = FALSE")
     int CountNotArchivedThreads();
 
-    @Query("SELECT t FROM Thread t WHERE t.isArchived = FALSE")
+    @Query("SELECT t FROM Thread t WHERE t.isArchived = FALSE ORDER BY t.bumpedAt DESC")
     List<Thread> findThreadsNotArchived();
 
 
