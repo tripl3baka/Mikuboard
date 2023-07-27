@@ -1,3 +1,8 @@
+
+<p align="center">
+  <img src="./README_media/img_1.png" width="300">
+</p>
+
 # Mikuboard - Miku-chan (literally)
 ![img.png](README_media/img.png)
 Mikuboard is an imageboard with functionality similar to various  _-chan_ boards. \
