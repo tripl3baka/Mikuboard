@@ -49,8 +49,8 @@ being automatically archived, and belongs to archive along with all it's replies
 ```
 Only not archived threads are being shown on the site by database custom query.
 ```java
-    @Query("SELECT t FROM Thread t WHERE t.isArchived = FALSE")
-    Page<Thread> findThreadsNotArchived(Pageable pageable);
+    @Query("SELECT t FROM Thread t WHERE t.isArchived = FALSE ORDER BY t.bumpedAt DESC")
+    List<Thread> findThreadsNotArchived();
 ```
 Threads can be "saved" from archiving by simply posting a reply. Thread with lastest reply 
 is being automatically displayed on the top of both main page and catalog. 
