@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive</title>
+    <!-- Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<link href="/custom.css" rel="stylesheet">
+<body>
+<div class="container mt-5">
+    <h1 style="color:white">/m/ Archive</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr style="color:white">
+            <th>Thread Name</th>
+            <th>Replies and Images</th>
+            <th>Archived Date</th>
+        </tr>
+        </thead>
+        <tbody style="color:white">
+
+        <tr  th:each="thread : ${threadsArchived}">
+            <td th:text="${thread.getTitle()}">Thread Title</td>
+            <td th:text="'R:'+ ${thread.replies.size()-1} + '/I:' +
+                        ${thread.getRepliesWithImage().size()}" >R/I</td>
+            <td th:text="${#temporals.format(thread.getBumpedAt(), 'dd/MMM/yyyy HH:mm:ss')}">Date</td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

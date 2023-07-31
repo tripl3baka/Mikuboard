@@ -24,5 +24,7 @@ public interface ThreadRepository extends JpaRepository<Thread, Integer>{
     @Query("SELECT t FROM Thread t WHERE t.isArchived = FALSE ORDER BY t.bumpedAt DESC")
     List<Thread> findThreadsNotArchived();
 
+    @Query("SELECT t FROM Thread t WHERE t.isArchived = TRUE ORDER BY t.bumpedAt DESC")
+    List<Thread> findThreadsArchived();
 
 }
