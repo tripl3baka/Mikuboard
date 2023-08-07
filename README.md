@@ -47,6 +47,7 @@ being automatically archived, and belongs to archive along with all it's replies
             threadRepository.saveAndFlush(threadToArchive.get());
         }
 ```
+![img.png](README_media/img_2.png)
 Only not archived threads are being shown on the site by database custom query.
 ```java
     @Query("SELECT t FROM Thread t WHERE t.isArchived = FALSE ORDER BY t.bumpedAt DESC")
