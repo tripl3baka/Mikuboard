@@ -215,3 +215,7 @@ label{
 h2{
     color:white
 }
+
+.table-striped{
+    background-color: rgba(49, 156, 133, 0.71);
+}
