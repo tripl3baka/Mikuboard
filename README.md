@@ -104,7 +104,7 @@ Web config restricts posts removal only for administrator role.
 }
 ```
 After successfull authentication, the administrator can delete posts or the entire threads. \
-Cascade property of relation between Thread and Reply guarantees, that after deleting given thread, 
+Cascade property of relation between "Thread" and "Reply" guarantees, that after deleting given thread, 
 all the replies are being deleted as well, without making additional requests to database.
 ![admindelete.gif](admindelete.gif)
 Post delete functionality uses XMLHttpRequest to avoid page refreshing after thread delete 
